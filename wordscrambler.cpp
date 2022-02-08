@@ -4,7 +4,7 @@
 using namespace std;
 
 
-void random(string word){
+int random(string word){
     srand((unsigned) time(NULL));
     int length = word.length();
 
