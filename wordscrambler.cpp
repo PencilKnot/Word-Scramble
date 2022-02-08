@@ -12,9 +12,20 @@ void random(string word){
     return random;
 }
 
+string scramble(string word){
+    int first=0, last=word.length();
+    for(int i=first; i<last; i++){
+        int rand=random(word);
+        char index=word[i];
+        word[i]=word[rand];
+        word[rand]=index;
+    }
+    return word;
+}
+
 int main(){
     string word;
     cin >> word;
-    cout << random(word);
-    cout << "Here is a random number!";
+    string scrambled = scramble(word);
+    cout << "Here is a scrambled word: " << scrambled;
 }
