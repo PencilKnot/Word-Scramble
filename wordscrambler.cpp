@@ -4,28 +4,26 @@
 using namespace std;
 
 
-int random(string word){
+int random(int a, int b){
     srand((unsigned) time(NULL));
-    int length = word.length();
-
-    int random = 1 + (rand() % length - 1);
+    
+    int random = a + (rand() % b - 1);
     return random;
 }
 
 string scramble(string word){
     int first=0, last=word.length();
     for(int i=first; i<last; i++){
-        int rand=random(word);
+        int rand=random(1, word.length());
         char index=word[i];
         word[i]=word[rand];
         word[rand]=index;
     }
-    return word;
 }
 
 int main(){
     string word;
     cin >> word;
-    string scrambled = scramble(word);
+    string scrambled = scramble(scramble(scramble(scramble(word))));
     cout << "Here is a scrambled word: " << scrambled;
 }
