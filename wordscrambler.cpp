@@ -33,12 +33,12 @@ string scramble1(string word) {
 
 int main() {
 
-    const string wordlist[50] = {"marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry", "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word", "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist", "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth", "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime"};
+    const string wordlist[100] = {"marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry", "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word", "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist", "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth", "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime", "empire", "mourning", "primary", "enfix", "essential", "faint", "program", "anger", "impress", "storm", "displace", "gas", "prefer", "occupation", "skate", "edge", "screw", "laborer", "lick", "stereotype", "lonely", "thirsty", "offspring", "metal", "conserve", "laboratory", "deny", "fame", "helicopter", "imperial", "forget", "choke", "shoulder", "soup", "offend", "latest", "fabricate", "decide", "improve", "bill", "team", "protect", "knee", "shoot", "allowance", "refuse", "compartment", "planet", "absolute", "principle"};
 
 	// game title
-    cout << "              \n";
+    cout << "==============\n";
     cout << "Word Scrambler\n";
-    cout << "              \n\n";
+    cout << "==============\n\n";
 
 	// scramble
 	// cout << "OG scramble\n:";
@@ -58,16 +58,17 @@ int main() {
 
 	// gameplay loop
     while (1) {
-        const string word = wordlist[random(50)];
+        const string word = wordlist[random(100)];
         string next, answer;
         bool isCorrect = false;
         int counter = 3;
-        string scrambled = scramble(scramble(scramble(scramble(word))));
-        int check = scrambled.compare(word);
-        while (check == 0) {
-            scrambled = scramble(word);
-            check = scrambled.compare(word);
-        }
+        // string scrambled = scramble(scramble(scramble(scramble(word))));
+        // int check = scrambled.compare(word);
+        // while (check == 0) {
+        //     scrambled = scramble(word);
+        //     check = scrambled.compare(word);
+        // }
+        string scrambled = scramble1(word);
         cout << "Unscramble the following word: " << scrambled << "\nYou have 3 guesses.\n";
         cin >> answer;
 
