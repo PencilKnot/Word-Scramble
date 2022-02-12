@@ -12,90 +12,65 @@ int random(int b) {
   return (rand() % b); 
 }
 
+//Fisher-Yates shuffle algorithm
 string scramble(string word) {
-    int len = word.length();
-    for (int i = 0; i < len; i++) {
-        swap(word[i], word[random(len)]);
-    }
-    return word;
-}
-
-// Fisher-Yates shuffle algorithm
-string scramble1(string word) {
-	srand(time(NULL));
-	int len = word.length();
-	for (int i = len - 1; i; --i) {
-		int j = rand() % (i + 1);
-		swap(word[i], word[j]);
-	}
-	return word;
+  srand(time(NULL));
+  int len = word.length();
+  for (int i = len - 1; i; --i) {
+	  int j = rand() % (i + 1);
+	  swap(word[i], word[j]);
+  }
+  return word;
 }
 
 int main() {
 
-    const string wordlist[100] = {"marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry", "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word", "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist", "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth", "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime", "empire", "mourning", "primary", "enfix", "essential", "faint", "program", "anger", "impress", "storm", "displace", "gas", "prefer", "occupation", "skate", "edge", "screw", "laborer", "lick", "stereotype", "lonely", "thirsty", "offspring", "metal", "conserve", "laboratory", "deny", "fame", "helicopter", "imperial", "forget", "choke", "shoulder", "soup", "offend", "latest", "fabricate", "decide", "improve", "bill", "team", "protect", "knee", "shoot", "allowance", "refuse", "compartment", "planet", "absolute", "principle"};
+    const string wordlist[50] = {"marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry", "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word", "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist", "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth", "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime"};
 
-	// game title
+    //game title
     cout << "==============\n";
     cout << "Word Scrambler\n";
     cout << "==============\n\n";
 
-	// scramble
-	// cout << "OG scramble\n:";
-	// string test = "helloworld";
-	// for (int i = 0; i < 100; ++i) {
-	// 	test = scramble(test);
-	// 	cout << test << '\n';
-	// }
-
-	// scramble1
-	// cout << "\nFisher-Yates algorithm: \n";
-	// for (int i = 0; i < 100; ++i) {
-	// 	test = scramble1(test);
-	// 	cout << test << '\n';
-	// }
-
-
-	// gameplay loop
-    while (1) {
-        const string word = wordlist[random(100)];
+    // gameplay loop
+    while(1){
+        const string word = wordlist[random(50)];
         string next, answer;
         bool isCorrect = false;
         int counter = 3;
-        // string scrambled = scramble(scramble(scramble(scramble(word))));
-        // int check = scrambled.compare(word);
-        // while (check == 0) {
-        //     scrambled = scramble(word);
-        //     check = scrambled.compare(word);
-        // }
-        string scrambled = scramble1(word);
+        string scrambled = scramble(scramble(scramble(scramble(word))));
+        int check = scrambled.compare(word);
+        while (check == 0) {
+            scrambled = scramble(word);
+            check = scrambled.compare(word);
+        }
         cout << "Unscramble the following word: " << scrambled << "\nYou have 3 guesses.\n";
         cin >> answer;
-
-		// check user input
-		while (1) {
-			--counter;
-			if (answer == word) {
-				cout << "Correct! Well done.\n";
-				break;
-			}
-			if (counter == 0) {
-				cout << "Sorry, you did not get the word. It was: \"" << word << "\".\n";
-                break;
-			}
-			cout << "Incorrect. You have " << counter << " guesses left. Try again!\n";
-			cin >> answer;
+	    
+	    //check user input
+	    while(1) {
+		--counter;
+		if(answer == word) {
+		    cout << "Correct! Well done.\n";
+		    break;
+	    	}
+		if(counter == 0) {
+		    cout << "Sorry, you did not get the word. It was: \"" << word << "\".\n";
+		    break;
 		}
-		
-		// replay inquiry
-        cout << "Play again? Type `yes` to continue.\n";
+		cout << "Incorrect. You have " << counter << " guesses left. Try again!\n";
+		cin >> answer;
+	}
+
+	//replay inquiry
+        cout << "Play again? Type yes to continue.\n";
         cin >> next;
         if (next != "yes") {
-			break;
-		}
+	    break;
+    	}
     }
 
-	cout << "Thank you for playing Word Scrambler.\n";
+  cout << "Thank you for playing Word Scrambler.\n";
 
-    return 0;    
+  return 0;    
 }
