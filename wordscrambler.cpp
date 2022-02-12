@@ -1,67 +1,100 @@
 #include <iostream>
-#include<cstdlib>
+#include <cstdlib>
+#include <string>
+#include <algorithm>
+#include <ctime>
 
 using namespace std;
 
-
-int random(int a, int b){ //generates random number between a and b
-    srand((unsigned) time(NULL));
-    
-    int random = a + (rand() % b - 1);
-    return random;
+// generate a random index in the range [0, b)
+int random(int b) {
+  srand(time(NULL));
+  return (rand() % b); 
 }
 
-string scramble(string word){ //scrambles given string
-    int first = 0, last = word.length();
-    for(int i = first; i < last; i++){
-        int rand = random(1, word.length());
-        char index = word[i];
-        word[i] = word[rand];
-        word[rand] = index;
+string scramble(string word) {
+    int len = word.length();
+    for (int i = 0; i < len; i++) {
+        swap(word[i], word[random(len)]);
     }
     return word;
 }
 
-int main(){
-    const std::string wordlist[50]={"marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry",
-                                    "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word",
-                                    "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist",
-                                    "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth",
-                                    "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime"};
-    bool play = true;
+// Fisher-Yates shuffle algorithm
+string scramble1(string word) {
+	srand(time(NULL));
+	int len = word.length();
+	for (int i = len - 1; i; --i) {
+		int j = rand() % (i + 1);
+		swap(word[i], word[j]);
+	}
+	return word;
+}
 
-    cout << "==============\n"; //Game title
+int main() {
+
+    const string wordlist[50] = {"marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry", "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word", "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist", "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth", "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime"};
+
+	// game title
+    cout << "              \n";
     cout << "Word Scrambler\n";
-    cout << "==============\n";
+    cout << "              \n\n";
 
-    while(play){ //gameplay loop
-        const string word = wordlist[random(0, 49)];
+	// scramble
+	// cout << "OG scramble\n:";
+	// string test = "helloworld";
+	// for (int i = 0; i < 100; ++i) {
+	// 	test = scramble(test);
+	// 	cout << test << '\n';
+	// }
+
+	// scramble1
+	// cout << "\nFisher-Yates algorithm: \n";
+	// for (int i = 0; i < 100; ++i) {
+	// 	test = scramble1(test);
+	// 	cout << test << '\n';
+	// }
+
+
+	// gameplay loop
+    while (1) {
+        const string word = wordlist[random(50)];
         string next, answer;
         bool isCorrect = false;
-        int counter = 1;
+        int counter = 3;
         string scrambled = scramble(scramble(scramble(scramble(word))));
+        int check = scrambled.compare(word);
+        while (check == 0) {
+            scrambled = scramble(word);
+            check = scrambled.compare(word);
+        }
         cout << "Unscramble the following word: " << scrambled << "\nYou have 3 guesses.\n";
         cin >> answer;
-        while(!isCorrect){
-            if(answer == word){
-                cout << "That's the right word!\n";
-                isCorrect = true;
-            }
-            else{
-                if(counter == 3){
-                    cout << "That's incorrect. The unscrambled word was " << word << ".\n";
-                    isCorrect = true;
-                }
-                else{
-                    cout << "That's incorrect. Try again!\n";
-                    cout << "You have " << 3 - counter << " guesses left.\n";
-                    counter++;
-                    cin >> answer;
-                }                
-            }
-        }       
-        cout << "Play again? Type yes to continue.\n";
+
+		// check user input
+		while (1) {
+			--counter;
+			if (answer == word) {
+				cout << "Correct! Well done.\n";
+				break;
+			}
+			if (counter == 0) {
+				cout << "Sorry, you did not get the word. It was: \"" << word << "\".\n";
+                break;
+			}
+			cout << "Incorrect. You have " << counter << " guesses left. Try again!\n";
+			cin >> answer;
+		}
+		
+		// replay inquiry
+        cout << "Play again? Type `yes` to continue.\n";
         cin >> next;
-        if(next != "yes") play = false;
-    }    
+        if (next != "yes") {
+			break;
+		}
+    }
+
+	cout << "Thank you for playing Word Scrambler.\n";
+
+    return 0;    
 }
