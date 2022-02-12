@@ -25,7 +25,7 @@ string scramble(string word) {
 
 int main() {
 
-    const string wordlist[50] = {"marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry", "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word", "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist", "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth", "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime"};
+    const string wordlist[100] = {"empire", "mourning", "primary", "enfix", "essential", "faint", "program", "anger", "impress", "storm", "displace", "gas", "prefer", "occupation", "skate", "edge", "screw", "laborer", "lick", "stereotype", "lonely", "thirsty", "offspring", "metal", "conserve", "laboratory", "deny", "fame", "helicopter", "imperial", "forget", "choke", "shoulder", "soup", "offend", "latest", "fabricate", "decide", "improve", "bill", "team", "protect", "knee", "shoot", "allowance", "refuse", "compartment", "planet", "absolute", "principle", "marine", "dimension", "equinox", "robot", "infinite", "dragon", "unity", "judgment", "canadian", "forestry", "classroom", "rainbow", "hope", "shift", "quest", "elite", "achieve", "loyalty", "legendary", "word", "goat", "leader", "avenue", "straw", "glue", "offense", "dine", "coal", "minute", "socialist", "judicial", "gradual", "throne", "hook", "graze", "sermon", "still", "pie", "exemption", "worth", "queue", "record", "crackpot", "departure", "pawn", "corn", "publisher", "degree", "air", "crime"};
 
     //game title
     cout << "==============\n";
@@ -34,7 +34,7 @@ int main() {
 
     // gameplay loop
     while(1){
-        const string word = wordlist[random(50)];
+        const string word = wordlist[random(100)];
         string next, answer;
         bool isCorrect = false;
         int counter = 3;
